@@ -12,7 +12,7 @@ const schema = Yup.object().shape({
     .required('E-mail obrigatório'),
   password: Yup.string()
     .required('A senha é obrigatória')
-    .min(8, 'A senha deve ter 8 caracteres'),
+    .min(8, 'A senha deve ter 8 caracteres '),
 });
 
 export default function Signin() {
