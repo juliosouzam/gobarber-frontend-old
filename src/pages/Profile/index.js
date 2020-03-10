@@ -1,7 +1,42 @@
 import React from 'react';
+import { Form, Input } from '@rocketseat/unform';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { Container } from './styles';
+import { Container } from './styles';
+import { updateProfilRequest } from '~/store/modules/user/actions';
 
 export default function Profile() {
-  return <h1>Profile</h1>;
+  const profile = useSelector(state => state.user.profile);
+  const dispatch = useDispatch();
+
+  function handleSubmit(data) {
+    dispatch(updateProfilRequest(data));
+  }
+
+  return (
+    <Container>
+      <Form onSubmit={handleSubmit} initialData={profile}>
+        <Input name="name" placeholder="Nome completo" />
+        <Input name="email" type="email" placeholder="Seu e-mail" />
+
+        <hr />
+
+        <Input
+          name="oldPassword"
+          type="password"
+          placeholder="Sua senha atual"
+        />
+        <Input name="password" type="password" placeholder="Nova senha" />
+        <Input
+          name="password_confirmation"
+          type="password"
+          placeholder="Confirmação da senha"
+        />
+
+        <button type="submit">Atualizar perfil</button>
+      </Form>
+
+      <button type="button">Sair do GoBarber</button>
+    </Container>
+  );
 }
